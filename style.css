@@ -126,6 +126,21 @@ main {
     
 }
 
+.weather-container button:active {
+    background-color: rgb(80, 80, 80);
+    
+}
+
+.weather-container .clicked {
+    background-color: rgb(80, 80, 80);
+    color: rgb(230, 230, 230);
+}
+
+.weather-container .clicked:hover {
+    /* background-color: rgb(219, 219, 219); */
+    color: black;
+}
+
 .weather-container img {
     width: 15px;
     top: 2px;
