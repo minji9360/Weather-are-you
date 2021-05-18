@@ -128,7 +128,7 @@ main {
 
 .weather-container button:active {
     background-color: rgb(80, 80, 80);
-    
+    color: rgb(230, 230, 230);
 }
 
 .weather-container .clicked {
@@ -137,8 +137,8 @@ main {
 }
 
 .weather-container .clicked:hover {
-    /* background-color: rgb(219, 219, 219); */
-    color: black;
+    background-color: rgb(80, 80, 80);
+    /* color: black; */
 }
 
 .weather-container img {
