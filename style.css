@@ -68,7 +68,8 @@ main {
 .today-weather {
     background-color: rgb(172, 238, 129);
     width: 270px;
-    height: 366.8px;
+    /* height: 366.8px; */ /* 이상기후 배너 떠있을 경우 */
+    height: 410.8px;
     border-radius: 5px;
     float: left;
 }
@@ -103,4 +104,34 @@ main {
 
 .rank li {
     margin: 0 0 10px 10px;
+}
+
+.weather-container {
+    margin: 0 0 10px 10px;
+    text-align: center;
+    float: left;
+}
+
+.weather-container button {
+    font-size: 16px;
+    /* width: 130px; */
+    /* background-color: red; */
+    border: 1px solid rgb(68, 68, 68);
+    padding: 7px 19.3px;
+    border-radius: 5px;
+}
+
+.weather-container button:hover {
+    background-color: rgb(219, 219, 219);
+    
+}
+
+.weather-container img {
+    width: 15px;
+    top: 2px;
+    position: relative;
+}
+
+.hidden {
+    visibility: hidden;
 }
