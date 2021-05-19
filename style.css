@@ -150,3 +150,5 @@ main {
 .hidden {
     visibility: hidden;
 }
+
+/* 가로 1024 이하일 때, 가로폭 및 UI 조정해야 함 */

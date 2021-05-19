@@ -1,5 +1,25 @@
 const weatherButtonsContainer = document.querySelector("#weatherContainer");
 
+function getNow() {
+	const today = new Date();
+	const year = today.getFullYear();
+	const month = ("0" + (1 + today.getMonth())).slice(-2);
+	const day = ("0" + today.getDate()).slice(-2);
+	const hours = ("0" + today.getHours()).slice(-2); // 시
+	const minutes = ("0" + today.getMinutes()).slice(-2); // 분
+
+	return [year + month + day, hours + minutes];
+}
+
+function setNow() {
+	const date = getNow();
+	const dateHiddenInput = document.querySelector("#todayDate");
+	const timeHiddenInput = document.querySelector("#nowTime");
+
+	dateHiddenInput.value = date[0];
+	timeHiddenInput.value = date[1];
+}
+
 // 날씨 카테고리 버튼 클릭 시 동작하는 함수
 function clickWeatherButtons(clickedButton) {
 	const buttons = clickedButton.parentNode.querySelectorAll("button");
@@ -30,6 +50,10 @@ function clickWeatherButtons(clickedButton) {
 	title.innerHTML = weatherNames[idx];
 }
 
-function init() {}
+function init() {
+	setNow();
+	getWeather();
+	// getCurrentWeather();
+}
 
 init();
