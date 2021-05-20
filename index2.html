@@ -12,14 +12,25 @@
 <body>
     <header>Weather are you?</header>
     <main>
+        <!-- <h1>{{ weather["기온"] }}</h1> -->
         <!-- <div class="notice">
             <p class="notice__p">폭염 D-10</p>
         </div> -->
         <div class="today-weather">
-            <p class="notice__p">오늘 날씨</p>
-            <p class="description">API 연동해서 날씨 나오도록 해봐야<br>크기/디자인 같은거 대충 볼 수 있을 듯?</p>
-            <input name="todayDate" id="todayDate" value="">
-            <input name="nowTime" id="nowTime" value="">
+            <p class="notice__p">20시 현재, 맑음</p>
+            <div class="status-container">
+                <!-- <p class="location">창원</p> -->
+                <img class="weather__img" src="https://img.icons8.com/windows/96/000000/heavy-rain.png"/>
+                <div class="status">
+                    <p class="temp">17℃</p>
+                    <p class="water">습도 : 80%<br/>
+                        강수형태 : 소나기<br/>
+                        1시간 강수량 : 10mm</p>
+                </div>
+                <!-- <p class="thunder">낙뢰 : {{ weather["낙뢰"]}}</p> -->
+                <input type="hidden" name="todayDate" id="todayDate" value="">
+                <input type="hidden" name="nowTime" id="nowTime" value="">
+            </div>
             <!-- <input type="hidden" name="today" id="today" value=""> -->
         </div>
         <div class="weather-container" id="weatherContainer">
