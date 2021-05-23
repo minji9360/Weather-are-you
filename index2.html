@@ -17,15 +17,78 @@
             <p class="notice__p">폭염 D-10</p>
         </div> -->
         <div class="today-weather">
-            <p class="notice__p">20시 현재, 맑음</p>
+            <p class="notice__p">{{ weather["시간"] }}시 {{ weather["분"] }}분 기준, 
+              {% if weather["강수형태"] == 1 %}
+                비 
+              {% elif weather["강수형태"] == 2 %}
+                진눈깨비
+              {% elif weather["강수형태"] == 5 %}
+                빗방울
+              {% elif weather["강수형태"] == 6 %}
+                빗방울/눈날림
+              {% elif weather["강수형태"] == 3 %}
+                눈
+              {% elif weather["강수형태"] == 4 %}
+                소나기
+              {% elif weather["강수형태"] == 7 %}
+                눈날림
+              {% elif weather["하늘상태"] == 1 %}
+                맑음
+              {% elif weather["하늘상태"] == 3 %}
+                구름 많음
+              {% elif weather["하늘상태"] == 4 %}
+                흐림
+              {% else %}
+                날씨값 없음
+              {% endif %}
+              </p>
             <div class="status-container">
                 <!-- <p class="location">창원</p> -->
-                <img class="weather__img" src="https://img.icons8.com/windows/96/000000/heavy-rain.png"/>
+                {% if weather["강수형태"] == 1 or weather["강수형태"] == 2 or weather["강수형태"] == 5 or weather["강수형태"] == 6 %}
+                  <img class="weather__img" src="https://img.icons8.com/windows/96/000000/heavy-rain.png"/>
+                {% elif weather["강수형태"] == 4 %}
+                  <img src="https://img.icons8.com/windows/96/000000/downpour--v1.png"/>
+                {% elif weather["강수형태"] == 3 or weather["강수형태"] == 7%}
+                  <img src="https://img.icons8.com/windows/100/000000/snow.png"/>
+                {% elif weather["하늘상태"] == 1 %}
+                  <img src="https://img.icons8.com/windows/64/000000/sun--v1.png"/>
+                {% elif weather["하늘상태"] == 3 %}
+                  <img src="https://img.icons8.com/windows/96/000000/partly-cloudy-day--v1.png"/>
+                {% elif weather["하늘상태"] == 4 %}
+                  <img src="https://img.icons8.com/windows/96/000000/clouds.png"/>
+                {% else %}
+                  날씨값 없음
+                {% endif %}
                 <div class="status">
-                    <p class="temp">17℃</p>
-                    <p class="water">습도 : 80%<br/>
-                        강수형태 : 소나기<br/>
-                        1시간 강수량 : 10mm</p>
+                    <p class="temp">{{ weather["기온"] }}℃</p>
+                    <p class="water">습도 : {{ weather["습도"] }}%<br/>
+                        강수형태 : 
+                        {% if weather["강수형태"] == 0 %}
+                          없음
+                        {% elif weather["강수형태"] == 1 %}
+                          비
+                        {% elif weather["강수형태"] == 2 %}
+                          진눈깨비
+                        {% elif weather["강수형태"] == 3 %}
+                          눈
+                        {% elif weather["강수형태"] == 4 %}
+                          소나기
+                        {% elif weather["강수형태"] == 5 %}
+                          빗방울
+                        {% elif weather["강수형태"] == 6 %}
+                          빗방울/눈날림
+                        {% elif weather["강수형태"] == 7 %}
+                          눈날림
+                        {% endif %}
+                        <br/>
+                        1시간 강수량 : {{ weather["1시간 강수량"] }}mm<br/>
+                        풍속 : 
+                        {% if "풍속" in  weather %}
+                          {{ weather["풍속"] }}m/s
+                        {% else %}
+                          값 없음
+                        {% endif %}
+                        <br/></p>
                 </div>
                 <!-- <p class="thunder">낙뢰 : {{ weather["낙뢰"]}}</p> -->
                 <input type="hidden" name="todayDate" id="todayDate" value="">
@@ -93,10 +156,6 @@
                 <li>10위 부대찌개</li>
             </ol>
         </div>
-        <p class="description test">임시로 대애애충 구현만 해둔거고 기능 넣어보고 디자인 바꿔가면서 조율할 예정<br>
-            색깔도 임시로 구역 확인하느라 알록달록입니다..<br>
-            기능 구현하면서 추가할 아이디어도 생각해볼 예정<br>
-            추가 아이디어 있으면 받습니다.</p>
     </main>
     <footer></footer>
     <script type="text/javascript" src="main.js"></script>
