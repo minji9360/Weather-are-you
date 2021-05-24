@@ -6,20 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+    <!-- <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"> -->
     <title>Weather are you?</title>
 </head>
 <body>
     <header>Weather are you?</header>
     <main>
-        <div class="notice">
+        <!-- <h1>{{ weather["기온"] }}</h1> -->
+        <!-- <div class="notice">
             <p class="notice__p">폭염 D-10</p>
-        </div>
+        </div> -->
         <div class="today-weather">
-            <p class="notice__p">오늘 날씨</p>
-            <p class="description">API 연동해서 날씨 나오도록 해봐야<br>크기/디자인 같은거 대충 볼 수 있을 듯?</p>
+            <p class="notice__p"> 13시 00분 기준
+              {{ weather["시간"] }}시 {{ weather["분"] }}분 기준, 
+              {% if weather["강수형태"] == 1 %}
+                비 
+              {% elif weather["강수형태"] == 2 %}
+                진눈깨비
+              {% elif weather["강수형태"] == 5 %}
+                빗방울
+              {% elif weather["강수형태"] == 6 %}
+                빗방울/눈날림
+              {% elif weather["강수형태"] == 3 %}
+                눈
+              {% elif weather["강수형태"] == 4 %}
+                소나기
+              {% elif weather["강수형태"] == 7 %}
+                눈날림
+              {% elif weather["하늘상태"] == 1 %}
+                맑음
+              {% elif weather["하늘상태"] == 3 %}
+                구름 많음
+              {% elif weather["하늘상태"] == 4 %}
+                흐림
+              {% else %}
+                날씨값 없음
+              {% endif %}
+              </p>
+            <div class="status-container">
+                <!-- <p class="location">창원</p> -->
+                {% if weather["강수형태"] == 1 or weather["강수형태"] == 2 or weather["강수형태"] == 5 or weather["강수형태"] == 6 %}
+                  <img class="weather__img" src="https://img.icons8.com/windows/96/000000/heavy-rain.png"/>
+                {% elif weather["강수형태"] == 4 %}
+                  <img src="https://img.icons8.com/windows/96/000000/downpour--v1.png"/>
+                {% elif weather["강수형태"] == 3 or weather["강수형태"] == 7%}
+                  <img src="https://img.icons8.com/windows/100/000000/snow.png"/>
+                {% elif weather["하늘상태"] == 1 %}
+                  <img src="https://img.icons8.com/windows/64/000000/sun--v1.png"/>
+                {% elif weather["하늘상태"] == 3 %}
+                  <img src="https://img.icons8.com/windows/96/000000/partly-cloudy-day--v1.png"/>
+                {% elif weather["하늘상태"] == 4 %}
+                  <img src="https://img.icons8.com/windows/96/000000/clouds.png"/>
+                {% else %}
+                  날씨값 없음
+                {% endif %}
+                <img src="https://img.icons8.com/windows/96/000000/clouds.png"/>
+                <div class="status">
+                    <p class="temp">{{ weather["기온"] }}℃</p>
+                    <p class="temp">{{ weather["기온"] }}℃</p>
+                    <p class="water">습도 : {{ weather["습도"] }}%<br/>
+                        강수형태 : 
+                        {% if weather["강수형태"] == 0 %}
+                          없음
+                        {% elif weather["강수형태"] == 1 %}
+                          비
+                        {% elif weather["강수형태"] == 2 %}
+                          진눈깨비
+                        {% elif weather["강수형태"] == 3 %}
+                          눈
+                        {% elif weather["강수형태"] == 4 %}
+                          소나기
+                        {% elif weather["강수형태"] == 5 %}
+                          빗방울
+                        {% elif weather["강수형태"] == 6 %}
+                          빗방울/눈날림
+                        {% elif weather["강수형태"] == 7 %}
+                          눈날림
+                        {% endif %}
+                        <br/>
+                        1시간 강수량 : {{ weather["1시간 강수량"] }}mm<br/>
+                        풍속 : 
+                        {% if "풍속" in  weather %}
+                          {{ weather["풍속"] }}m/s
+                        {% else %}
+                          값 없음
+                        {% endif %}
+                        <br/></p>
+                </div>
+                <!-- <p class="thunder">낙뢰 : {{ weather["낙뢰"]}}</p> -->
+                <input type="hidden" name="todayDate" id="todayDate" value="">
+                <input type="hidden" name="nowTime" id="nowTime" value="">
+            </div>
+            <!-- <input type="hidden" name="today" id="today" value=""> -->
+        </div>
+        <div class="weather-container" id="weatherContainer">
+            <button id="yellowDust" onclick="clickWeatherButtons(this)">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAABnElEQVR4nO2boVLDQBRFDwwKbDEVYMFSXf4BLGDLR4CEnwAJuh8RLMQWW2yxYEEUtd2dXhKSpc09MxV98+7uy+tMevOSgDHGdJiNBtYcCTkT4CmIDYFDQXsXfO8Bp4KuAF6FvNp8CZ/wIPiJKdqQgaiL/jCbvz++9cINyF1AbrYaWPNSyJlEYg/Ac4X9puKeRYW1jTFrTsoJngDXgv6MRXf1IujGwG0Qu0JzdAMhRyb1L7ALHAn6nUhM0cWatC9q/5TO+wA3IHcBxhiTkyZGYopRmQFvQWyPuf9YRughttFGaVPgXcirjUdiq4QbkLuA3DQxErsXcmLjqaojq5m4Z2wMZ7JSlmW/LMt+zho6fw7oPCknOAQuBP0Ni44uZnJCCuAxiJ0Dx4JWuflamxGau4rZ3radYC06fw5wA3IXkJvUSbDHfEy9jAnwGcTavhw2xph/hUdiq4QbkLuA3DQxEiuFnGkipmhDPkTdrMLaxpg1J3U1eIA2nhqzeMOx7fcFGsEjsa7gBuQuIDcpJ1igPYMfc3Rtvy9gjDGmKt/CeshbxKUdmgAAAABJRU5ErkJggg==">
+                황사
+            </button>
+            <button id="heatWave" onclick="clickWeatherButtons(this)">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAGCUlEQVR4nO2ba4hVVRTHf3deOJrWoFOOlTIqoVFGQ/TQXhRNhUU1H8ISCom0EgXpAfXBCi2hKKygksimyEInSumtfYki06aJJqWIUhPKpLFJ51GKM6cP6x7mzr5rn3P2edwrzPxhg+6713+tvc7e66y9zh4YxShOBFQCNeU2opxYDnwEjCm3IeXAqUA34AEfMwKd0IpM3m8fMIK2w1xgkOEO8ID3gOoy2lUSVALfUTx5v70DVJXNuhJgGfbJ+60VyJXLwCxRGPjC2lNlsjER6pElboMZ+DwkFmjxwAPuz9LYtDEe2dub0PewLfCtBx5S+n3nLMra8DRQDWxjyPC3Ge4EW+DrRrYFwFrldw84BlyZ+QwS4iWKDW9jyAm2wLe0gCMHvG4ZdwiYmfUk4mIF9kDWBpyOHvg6Kd4q1cCnFq4fgVOynYo75gPHCY7mfyl9g0hM0DAB6LBwfUhwkC0pZgFHiPZKM9trIdyTgT0W2dUpzyMWxhCczQW1w0BDBB2z8mNN+QHgmvSmEg/r0Cf3GXAv9ve6GfjCcJOF6yDRnJgJFigGecBeYGJ+zDJ0wztw38OrLPq2ARUJ5hELDcDfijH9wPnGWNMJQYEvCBVI0URzwsMx+BLhXYsh91jGL2bICesT6K0H/lD0HgVmJ+B1wq2KAR5SzQk6uS1G8oCke7YZCYCm/s9D9KeCCcCfivKDDKWyQZiekh1PKzZ4wF0p8VthC0QLslZsoAbYrdhxCDgtK6VTgF5F6dasFIbgMvQ3TGtWCrV3/n+U93DyqmLTAHBu2ooakEhrKluboo4VwEmOMhPRzxjvp2gXoO/9HqIFvii4HHlycZavdsQeBM5LyTZq0b28JiX+ccAvBby3O8qPAX5X7HszJfu4TSE/BpyREv9zBvc/wJmOHMstNqbyRmhTyDemQdzU1NSCntR8gltSU4ueISYuptaiv/qaHThyiBPNPTmusrJyn8Ltt7sdbX1U4fjekaMI1yuk3bh9tlqYl+tiuBPMpW+2I8A0Bz3T0FfTVAeOIqxUCDc4yE9g+NL0neBH/SAHeMAWR3u/VjiWOHIMwxaF8D4H+dWKfBdSMwibvN+ucNCnPbCwslsgtHrcRRFlpwB9irytrUIPZN8QPSA2K/IdEWVV9CiEdRFlX1FkbW07UiG60/J71NxgsiLbE1G2CNUK2XGilZ8aCS+T++1fpPAJ8qS/UsbsJdqliQr02BLrwkWdQhTVm2sUWVt70JC90DJuYUTdSVbtMNQoRIOEX1qoQQokpuyLwK9Gn7/0TWxV5HdGsLkK/Ygc+7ZJv0IWll5qJbM+5OQ2lSEnFC59E1crHB4wJ0S3FgN6Q2QC0akQXhsio33YLCyE+k4wl76JdoXniRCZ6xSZwGwwLKDtVvouCZG5SunbVPDv/cClwLMhPG8pfbeEyGi27QqRCcRSij3aGTD+LGV8H/H2YKPCNQhMCpDZpci4JG5FmK4QekCTZfzNytgvEuj/QeGbbxl7gcXWxiAFYVtgD/Ct0v+IZbwWIJMswZ+UPtsBSbOpHckhrIiS1KxT+lrQU2LNAV0RdNiwT+mrV/ouRlafiZfDFERxwAbkY0ghcsgho9boT/uK61Glz4wnY/O2mOeFA8gdpUBEcUA/clAxMRt43ug7rIxLUjjVVlS38f8X0POJxxHbU0E19osQKwvGtSi/tyfQq12RKVzqj1lsaieDa7Zz0L8N+E7IIUdgMxUdIN4H0QaKDzY+Vw69BOYhH2vOiaEvEpZYlHpIBjgWvSoT5z7PkwrPdqSM/kaAHa61RGcE1fJ+BjYr/T24fRmeiV6M3ZzXYdMfll2mggrcih1+24nUCMNwMlIFcuVfRwlvlucQb7sauYPglTCDeJN/hjJdq1+EHGtdjO1DPqrORfL6ScA8ZGu51BA95DV3R+azDMHZyPJ2fWpJ2w7s9YSSowo5dWmVoLTbAeQy1gn55zTjkULHb6Q/8X3AA7jfISgLqoAbkdwg6p/GaK07z3EDGV2OLkXkrEI+h81DsskZSFmsjqGn2YtMdj9SLusEvkTKWQMlsHEUIxb/AzSA87QJvgG9AAAAAElFTkSuQmCC">
+                폭염/열대야
+            </button>
+            <button id="highTemperature" onclick="clickWeatherButtons(this)">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAE70lEQVR4nO2ba4hVVRTHf/dm5WUmJ6ck1CjLmV5G0PSQPliMkIREmmJCUEF9KRSJsAiCPtSHsoePCAqhQoIgKyJ6MROmX+wx1VBEmfawRAMxS+1hiTl9WPfYcZ11zj17n3Pm3DveH2yGu+/aa6/1v2fvs/c+Z6BNm+OaioPtM8AVRQUC3AV8UqB/k3EOtucBlxUVCHBKgb5jqZbRaTPRFqDsAFqJDcCIKl0p2i022t1bUIzOjKUroAePu9RYEaAX2AS8B8x0aTgWBOgFNgJTkSE5gIMILuuAJM4EzlB124DfY+ynEl1TJNnH0cP/yQcEIswBhhz9JZI0CT5mfDe7/p01CVolsE9LL7Azwd8+UlwJrToEwpd9HKmGQysKkCb5gIYitJoALskHJIqQ1yToysfAF6puV4M21oSXltiJsSwBXgMed7DvQe7zVvJ7gEkp6rqAQZQIrTAEgkWOlfwg9rL6SWCdUR+IcHQ4NLsAXcD72MkPAPOAv43vjgC3Ey/CADANml+A/civqRkEbsROPiBJhBeAH6G8OWAhMq7DrAS2GrarkaO7lfXPA8B8kpMPCEQAuK3+dxVwT2BQlgAzid6WXsYWACToEeA6Gv/ymrAIvxFKHsoTwIfVwFNIQq4EIkTaNvscoPFJPrFtqwmQO2UNgTXAi6puWxmBlCXALuCzkvo+huN+CKQVoAJ05Nhvnr4ykWYIdALP43jY2IAHgH3Dw8PrAfr6+n7O0bcTja6AYPOwKOd+xwGr+vv7H8zZb66MBz7APm/bCswN2SadCZ6ErL4OxPh6OGOchT14WWc4HgGeBmrKNkmAgGnAh4bdkXoSvmQSIG4ILAJuNeqXA0uBg24xArL7mg28reorwLPAFA+fmbEE6EDW3JoV2FtTFw4CNxE9rz8V2fA0BcuJXlJDxN8x5gFfG23eAGbEtOkB/lD2/wIXe8Sb6xxQBXYYDq8ybGvAesM2XA4By2L6esiwX+sRc64CzDKcbTTsqsCbhm1cWWL46Eb29WG7vchdw4VcJ8E5hs1LRt0dwPVpOwGeAKarul+Bd1VdN3C5g9/MaAGsl6D0FVAB7nfsZzxwdwrfcTEUhhbgHPX5L+B7VXcBcK5HX9YV86VRp2MoFC1At/q8FxlTYXo9+zobOFHV/WLYTfT074UWQL84aU1Ihz37CiaoMFoQK6ZC0Z3pFxQmEb3/b/fsawdR8SYbdgc8/XuhBdDJVak/QQmxBfjBo6+3jDprLvEV2AstgDUpzTXqVjj2cwh7qWv5tmIYNeYTXVRsMuxOQDY1aRdC1mpwItGF0D+4nxZdC3yqyi2OPo7SgcwDOoGrDdtO4HXDNlwOI3sLi0cMe2uYjDrPEQ3sI+RX11SQrfNmZDMT2P+J7BMuienjLGSNoftZmFcSWbiQY5MJSqMXGiYgu7/pJK/na8j/BWj/32CLXAprSb+pceFk4JUY3zdk9J0rpxH/Dt4a/B6oTCb+jPHV7CHnzyxkVrYC/or0v1gNuA95NG35+hY5EWpKbsaeD4KyBXgU6EfGfg1JZgawAHmesCeh/W6iL0o0HYuJvxKylO3A+aOYRyauRALOK/l3gNNHNYMc6ETO//XqzaXsRFZpLv+u13RMQVZxSW9q6zIE3IncBpuKLL9EFbgUuAa4CFndTUCWv/uB74DPkff8fsoWZps2bQriPzNU5dNej+rgAAAAAElFTkSuQmCC">
+                이상고온
+            </button>
+            <button id="heavyRain" onclick="clickWeatherButtons(this)">
+                <img src="https://img.icons8.com/windows/64/000000/downpour--v1.png"/>
+                집중호우
+            </button>
+            <button id="typhoon" onclick="clickWeatherButtons(this)">
+                <img src="data:image/png;base64,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">
+                태풍
+            </button>
+            <button id="heavySnow" onclick="clickWeatherButtons(this)">
+                <img src="data:image/png;base64,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">
+                폭설
+            </button>
+            <button id="coldWave" onclick="clickWeatherButtons(this)">
+                <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAExklEQVR4nO2bW4iVVRTHf9N4ypmyzJjQEgvKwrIYpgsVFdTpqmCF9Z69JdRDdAERxPClCCopguqh6EIl3WGSah6KFLMcoSsiRRpqI40yM0o6w8z0sM9H3+zvv7+zv8s5WzrnDxtkzX+vvdZ/3Mu917eFNlobHRm4czPys+IIMNFA/4UxDEw3cNzWvFT+w0khFj2R0BYgdAChMavA3AngBw9eD7DIsv0JHLRsowViaQrsIviX57wHSRa8hxsRYB60/BZoCxA6gNAoUgTjuBZYaNk+B0Yc/F7gPsv2NTCUY+15QNWy7QG25/CVirQi+B7JQre09jNVBMs8CV4lfL3uO7nlt0BbgNABhEZZRTArPgG2WrbdIQIJJcAAsDHQ2jPQ8lugLUDoAEIjVA1YBVxv2Tbgd70uFaEE6K2NOF4lgAAtvwXaAoQOIDRC1YAnSd7YDoQIJJQAw8DvgdaegZbfAr4CzAYqJa47p0RfheCzBRYBH1Bu0OuA0cHBwfcB+vr69pfoOxPq/Q1YDGwBrih53QqwsVqtri3Zb6lYCOxD9++2A9fEuGk9wW7Mb/wfh691BeMs1BN0oQvYIRxPAmuAToufJkCEJZijrs2bAu4tEGtDBHhKOB0HVjr4PgIAnAF8JbiHgAU5Yy1dgMswHz5tpw+kzPEVAIwIPwn+OznjLV2ATcLhWw5uB+YDxx9izsvAuY55lwPHLP4kcGlKXJXaPBu+AnQBl6T4B+C8WiBxZ0eB+YI7F9gsFo+PEZJfgCI8K/ivOLgV4ENgDLjB+pmPAF3AF5it1udYA4DHhDPVvJwNbBNcNSaBe4SPBSS32jBwssWLko84tgj1BIiSj9cbpwgDwtnVgrfBM/n4oj3Cz2eCG+8U2ckrEdIEsJNPiBA/CHWQVGYU+N6yzSH7A4czgdXCPiBsV8b+PIV5PmfjNKCf5HaIowvz/eEW8bNxTA2agR6SSn0jJq8QPJ+xQ/i6VfBesDidwBsOn2PAI8K+Cf2bn8Z81JXF8CJB/kjwHs8pwFHhq1fw3ha8NBGmPG0y+fgWULc99TI072tR35unimMSuB940zMeZRsCbgZ+cQU1Jiap09leYfPBHmE7R9hcr8XSRKgHmTzMFOAAybe69vM2gC9rwWTFZmE7X9jSBM4jgjN5hZ9J7hu7fw/wmuCljXHgQuHnY8H1uRil1QSvgufCS8KJuq7Oxzx29BVgjfBxKqYw2sXrbM9Y64mQOXmAZQ5Hqhu0FH0HsMfT6KL0hOBuyxivS4RcyYNpke0XDtc7+PMwZ/oRMedb4HbHvLOAw2KOOizVgy1C7uQjqPvAceDGlDmnANdh+gXL0MUzHnC/WGMI0z3Kg0iEwsmDOWbuFQEexByWiqADeF74ngYeKui7k3ThM+FudJDDJB8l+qIbeNfh9zuSbbbgeBEd7ATmiuxbrQHuAn51+DsMXFBa1CWigt6r0RjFdH2Wo/fuxcCjmA6yy8cx4KZGJlEU3cCn+P1b/zfwI+bIe9yDPwbc0bxU8mMW8AzuG1aesRt9wjyhUQV2USzxCeA54PQmx14aKpgHTuoDR9o4gnkDtLj5IaejyP8E7QXuxPTwlmBa4FFD8xDwG7AT0/bqR7e2/ncI9eCijTZy4l+5WaUgvQvRkQAAAABJRU5ErkJggg=="> -->
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAADvElEQVR4nO3aT4gcRRTH8U8yiQpGcF2IwiqiKCrBkyf/XBxUcMX1D4qiouQSvAUVFDYaFRT/gsSLYg5KDioiiEQPIroIEZE1elEM+DeoEUVNjCaymt3xUFns9PTudvd09cys/YU6TPfrqle/nq569apoaGhoaPj/0sphcwc24RC+xGxUjwaQSXQOl73Yhiuxqp9O1UlSgGT5AVtwEVb0zbsaWEiAZPkWj+LsPvkYlTwCJMtneACn98PZGFyNPYqJ0BEGy/dwO0Zr97piWrgN/yguRAd/4w3cjDU1+14pG5QTIFkO4GVM4Kh63e+dFXhHd6d+EuKEomL8hq1oY2WN/eiJK3R35AXhO9+AHZjLsFmqDM20ugoHHen8zpTNGbgPnysuRAdf4EEDPK3u0h0HLMQ6YVr8SjkxBnJa/UD3GLAUK4W/95bD9mWm1R3YiBOr60o5ygiQpIVLhHXFfsXFOIS3cSuO660r5ehVgCTHCIurVzCjuBh/YTuuV+O0WqUASY4X3up25YKu2larsQRIMoY7Ma24EPPT6lUR/EI9AiQ5FfcoPq1OLlXxsERfu/EYzsHdVVY8LALMcyHur7LCYUprrcFLODbj3h5MCbHChDCY5mKYBLgXp6SuzeAuPOu/ZO3RGMdNwhQZhboHwdX4JdXm/NvuC3ULcLnuEf7FKioelkFwXca1bVVUXLcAo7hWyBusb7fb7ampqZNzPJdls6tSzwpS9BMYE5Ims6nnOq1W62tBlMXYmn4Oa8s6XwVFBDgPP8qO1JLl4UXqiCZA7E9gLd7ESTlsJ7E+rjvdxBbgccWSF0/IDnSiEVOAEdyQutbBk7hU2HXel7o/imsi+lQZecaAi3V/t8+lbCYybJ7JqGsox4B02ErYU0jyVoZNrfm+mAJkpafSsflMhk2eQxuVMSyRYDQaAfrtQL8pK8Bc6vfqDJusXMPAHbAqK8DPqd8jOCt17YIcz/WdsgJMZ1x7VdjmPlPYGL0ldf8APi3Z3sBxmuK7OM8vUFfa7vUMm4ELhL7BUwXs92Jzybai0ssssAmv5bD7E9fhux7aikYvAswKHZvEHwvYvI/z8W4P7USl17T4HB4RFjDjOFfI338vxP0f9Vh/dKraF9inoixt3TSRYL8dEE6IJBnLsEkvrTsZzw0tO3XP8Tcm7l+m+wzi7pp9jMpm2YHTx/hQRiodT/fF00icgF/ljygPys42DTXj8h21ndO9xlg2jFv8n7DfkWPDsmREWElO43chjP4EDxmAw5ENDQ3Lj38BtI/3eEox66YAAAAASUVORK5CYII=">
+                한파
+            </button>
         </div>
         <div class="rank-container">
-            <h1 class="rank-title_h1">이상 기후에 영향을 받는 제품</h1>
+            <h1 class="rank-title_h1"><span id="rank-weather">이상기후</span>에 영향을 받는 제품</h1>
             <ol class="rank decrease">
                 <h2 class="rank-title_h2">소비가 감소한 제품</h2>
                 <li>1위 고구마 피자</li>
@@ -47,11 +159,10 @@
                 <li>10위 부대찌개</li>
             </ol>
         </div>
-        <p class="description test">임시로 대애애충 구현만 해둔거고 기능 넣어보고 디자인 바꿔가면서 조율할 예정<br>
-            색깔도 임시로 구역 확인하느라 알록달록입니다..<br>
-            기능 구현하면서 추가할 아이디어도 생각해볼 예정<br>
-            추가 아이디어 있으면 받습니다.</p>
     </main>
     <footer></footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script src="http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtNcst=L3%2BiSEpSWmyt%2FWOCfPWM7FGm1VFKlDiIeDm4OJ8pouGCm7DLYWT%2B7tfgJ3TACDrtdamcVTbtTlYga5PgCxIfbA%3D%3D" type="text/javascript" ></script>
 </body>
 </html>

@@ -10,17 +10,27 @@
 }
 
 header {
-    /* position: relative; */
-	height: 45px;
-	padding-top: 10px;
-	/* position: fixed; */
-	top: 0px;
+	height:120px;
+	padding-top: 15px;
+	top: 10px;
 	left: 0;
 	width: 100%;
-    background-color: black;
     color: white;
     text-align: center;
     font-size: 20px;
+}
+
+.logo {
+    width: 310px;
+    position: relative;
+    left: -385px;
+}
+
+.logo2 {
+    width: 250px;
+    position: relative;
+    left: -25px;
+    top: 3px
 }
 
 main {
@@ -29,12 +39,12 @@ main {
     position: relative;
     color: black;
     margin: auto;
-    padding-top: 10px;
+    padding-top: 13px;
 }
 
 .notice {
     width: 100%;
-    height: 80px;
+    height: 87px;
     background-color: rgb(255, 76, 52);
     border-radius: 5px;
     margin-bottom: 10px;
@@ -44,7 +54,7 @@ main {
     color: gray;
     font-size: 15px;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 95px;
 }
 
 .description {
@@ -107,16 +117,17 @@ main {
     border: 1px solid rgb(68, 68, 68);
     width: 270px;
     /* height: 366.8px; */ /* 이상기후 배너 떠있을 경우 */
-    height: 410.8px;
+    height: 473px;
     border-radius: 5px;
     float: left;
 }
 
 .rank-container {
     float: left;
-    margin-left: 10px;
-    background-color: rgb(127, 214, 255);
-    width: calc(100% - 280px);
+    margin-left: 13px;
+    /* background-color: rgb(127, 214, 255); */
+    border: 1px solid rgb(68, 68, 68);
+    width: calc(100% - 283px);
     border-radius: 5px;
 }
 
@@ -129,15 +140,27 @@ main {
 .rank-title_h2 {
     font-size: 19px;
     text-align: center;
-    margin: 13px 0;
+    margin: 15px 0;
 }
 
 .rank {
-    width: 48%;
+    width: 47.3%;
     float: left;
-    margin: 0 0 10px 10px;
-    background-color: rgb(205, 255, 253);
+    margin: 0 0 13px 13px;
+    background-color: rgb(235, 235, 235);
     border-radius: 5px;
+    line-height: 20px;
+    padding: 4px 5px;
+}
+
+.decrease {
+    background-color: rgb(240, 246, 255);
+    border: 1px solid rgb(68, 68, 68);
+}
+
+.increase {
+    background-color: rgb(255, 244, 244);
+    border: 1px solid rgb(68, 68, 68);
 }
 
 .rank li {
@@ -145,7 +168,7 @@ main {
 }
 
 .weather-container {
-    margin: 0 0 10px 10px;
+    margin: 0 0 10px 13px;
     text-align: center;
     float: left;
 }
@@ -155,8 +178,9 @@ main {
     /* width: 130px; */
     /* background-color: red; */
     border: 1px solid rgb(68, 68, 68);
-    padding: 7px 19.3px;
+    padding: 7px 18px;
     border-radius: 5px;
+    margin-right: 2.3px;
 }
 
 .weather-container button:hover {
@@ -186,7 +210,110 @@ main {
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
+}
+
+/* 챗봇 관련 */
+/* @keyframes example {
+  0%   {background-color: red;}
+  25%  {background-color: yellow;}
+  50%  {background-color: blue;}
+  100% {background-color: green;}
+} */
+
+.chatbot {
+    background-color: white;
+    width: 320px;
+    height: 430px;
+    position: fixed;
+    bottom: 150px;
+    right: 80px;
+    border-radius: 15px;
+    border: 1px solid rgb(68, 68, 68);
+  /* animation-name: example;
+  animation-duration: 4s; */
+}
+
+.chatbot-title {
+    height: 50px;
+    background-color: rgb(83, 83, 83);
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 16px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.chatbot-main {
+    padding: 15px;
+}
+
+.message {
+    line-height: 22.5px;
+    letter-spacing: 1px;
+    background-color: rgb(241, 241, 241);
+    padding: 8px;
+    width: 227px;
+    border-radius: 6px;
+}
+
+.time {
+    position: relative;
+    top: -16px;
+    left: 232px;
+    font-size: 11.5px;
+    color:rgb(102, 102, 102);
+}
+
+.select-container {
+}
+
+.select__button {
+    border: 1px solid gray;
+    padding: 8px 15px;
+    margin: 3px;
+    border-radius: 4px;
+}
+
+.input-container {
+    position: absolute;
+    bottom: 10px;
+}
+
+.text {
+    width: 234px;
+    border-bottom: 1px solid gray;
+    position: relative;
+    bottom: -2px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.submit {
+    padding: 8px 15px 7px 15px;
+    margin-left: 3px;
+    border-radius: 5px;
+    background-color: rgb(128, 128, 128);
+    color: white;
+    /* border: 1px solid gray; */
+}
+
+.chatbot-buttons button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background-color: rgb(95, 95, 95);
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
+}
+
+.chatbot-buttons img {
+    width: 35px;
+    position: relative;
+    top: 2px;
 }
 
 /* 가로 1024 이하일 때, 가로폭 및 UI 조정해야 함 */
