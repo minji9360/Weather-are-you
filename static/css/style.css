@@ -1,0 +1,316 @@
+@font-face {
+    font-family: 'NEXON Lv2 Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: "NEXON Lv2 Gothic";
+}
+
+header {
+	height:120px;
+	padding-top: 15px;
+	top: 10px;
+	left: 0;
+	width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+
+.logo {
+    width: 310px;
+    position: relative;
+    left: -385px;
+}
+
+.logo2 {
+    width: 250px;
+    position: relative;
+    left: -25px;
+    top: 3px
+}
+
+main {
+    max-width: 1024px;
+    /* min-width: 500px; */
+    position: relative;
+    color: black;
+    margin: auto;
+    padding-top: 13px;
+}
+
+.notice {
+    width: 100%;
+    height: 87px;
+    background-color: rgb(255, 76, 52);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.notice__p {
+    color: gray;
+    font-size: 15px;
+    text-align: center;
+    padding-top: 95px;
+}
+
+.description {
+    font-size: 14px;
+    margin: 10px 10px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.09em;
+}
+
+.status-container {
+    /* margin: auto; */
+    line-height: 20px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.location {
+    position: relative;
+}
+
+.weather__img {
+    position: relative;
+}
+
+.temp {
+    font-size: 40px;
+    line-height: 36px;
+    position: relative;
+    font-weight: 600;
+}
+
+.sky {
+    position: relative;
+    left: 45px;
+    top: -23px;
+}
+
+.water {
+    position: relative;
+    line-height: 24px;
+    top: 15px;
+    left: 65px;
+    text-align: left;
+}
+
+
+.test {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: rgb(102, 102, 102);
+    float: left;
+    color: white;
+    line-height: 20px;
+}
+
+.today-weather {
+    /* background-color: rgb(214, 214, 214); */
+    border: 1px solid rgb(68, 68, 68);
+    width: 270px;
+    /* height: 366.8px; */ /* 이상기후 배너 떠있을 경우 */
+    height: 473px;
+    border-radius: 5px;
+    float: left;
+}
+
+.rank-container {
+    float: left;
+    margin-left: 13px;
+    /* background-color: rgb(127, 214, 255); */
+    border: 1px solid rgb(68, 68, 68);
+    width: calc(100% - 283px);
+    border-radius: 5px;
+}
+
+.rank-title_h1 {
+    font-size: 23px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.rank-title_h2 {
+    font-size: 19px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.rank {
+    width: 47.3%;
+    float: left;
+    margin: 0 0 13px 13px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 5px;
+    line-height: 20px;
+    padding: 4px 5px;
+}
+
+.decrease {
+    background-color: rgb(240, 246, 255);
+    border: 1px solid rgb(68, 68, 68);
+}
+
+.increase {
+    background-color: rgb(255, 244, 244);
+    border: 1px solid rgb(68, 68, 68);
+}
+
+.rank li {
+    margin: 0 0 10px 10px;
+}
+
+.weather-container {
+    margin: 0 0 10px 13px;
+    text-align: center;
+    float: left;
+}
+
+.weather-container button {
+    font-size: 16px;
+    /* width: 130px; */
+    /* background-color: red; */
+    border: 1px solid rgb(68, 68, 68);
+    padding: 7px 18px;
+    border-radius: 5px;
+    margin-right: 2.3px;
+}
+
+.weather-container button:hover {
+    background-color: rgb(219, 219, 219);
+    
+}
+
+.weather-container button:active {
+    background-color: rgb(80, 80, 80);
+    color: rgb(230, 230, 230);
+}
+
+.weather-container .clicked {
+    background-color: rgb(80, 80, 80);
+    color: rgb(230, 230, 230);
+}
+
+.weather-container .clicked:hover {
+    background-color: rgb(80, 80, 80);
+    /* color: black; */
+}
+
+.weather-container img {
+    width: 15px;
+    top: 2px;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 챗봇 관련 */
+/* @keyframes example {
+  0%   {background-color: red;}
+  25%  {background-color: yellow;}
+  50%  {background-color: blue;}
+  100% {background-color: green;}
+} */
+
+.chatbot {
+    background-color: white;
+    width: 320px;
+    height: 430px;
+    position: fixed;
+    bottom: 150px;
+    right: 80px;
+    border-radius: 15px;
+    border: 1px solid rgb(68, 68, 68);
+  /* animation-name: example;
+  animation-duration: 4s; */
+}
+
+.chatbot-title {
+    height: 50px;
+    background-color: rgb(83, 83, 83);
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 16px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.chatbot-main {
+    padding: 15px;
+}
+
+.message {
+    line-height: 22.5px;
+    letter-spacing: 1px;
+    background-color: rgb(241, 241, 241);
+    padding: 8px;
+    width: 227px;
+    border-radius: 6px;
+}
+
+.time {
+    position: relative;
+    top: -16px;
+    left: 232px;
+    font-size: 11.5px;
+    color:rgb(102, 102, 102);
+}
+
+.select__button {
+    border: 1px solid gray;
+    padding: 8px 15px;
+    margin: 3px;
+    border-radius: 4px;
+}
+
+.input-container {
+    position: absolute;
+    bottom: 10px;
+}
+
+.text {
+    width: 234px;
+    border-bottom: 1px solid gray;
+    position: relative;
+    bottom: -2px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.submit {
+    padding: 8px 15px 7px 15px;
+    margin-left: 3px;
+    border-radius: 5px;
+    background-color: rgb(128, 128, 128);
+    color: white;
+    /* border: 1px solid gray; */
+}
+
+.chatbot-buttons button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background-color: rgb(95, 95, 95);
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
+}
+
+.chatbot-buttons img {
+    width: 35px;
+    position: relative;
+    top: 2px;
+}
+
+/* 가로 1024 이하일 때, 가로폭 및 UI 조정해야 함 */
