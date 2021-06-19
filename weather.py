@@ -1,9 +1,21 @@
 import requests
 import json
+from flask import request
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode, quote_plus
 import pytz
 import datetime
+
+
+def getLocation():
+  key = '23c7dccb1ee5be1f3780348bacb5c2f8' 
+  ip_address = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+  send_url = 'http://api.ipstack.com/' + ip_address + '?access_key=' + key 
+
+  r = requests.get(send_url) 
+  j = json.loads(r.text)
+
+  return j
 
 
 def getWeather():
